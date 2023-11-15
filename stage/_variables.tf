@@ -5,12 +5,6 @@ variable "region" {
   default     = "eu-west-1"
 }
 
-variable "state_role_arn" {
-  type        = string
-  description = "Role ARN to used during pulling remote state"
-  default     = null
-}
-
 variable "state_ci_bucket" {
   type    = string
   default = "medicitv-ci-tfstate"

@@ -6,7 +6,6 @@ data "terraform_remote_state" "api" {
     bucket   = var.state_ci_bucket
     key      = "medicitv-api-develop.tfstate"
     region   = var.region
-    role_arn = var.state_role_arn
   }
 }
 
