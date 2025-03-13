@@ -40,7 +40,7 @@ resource "aws_cloudwatch_event_rule" "fire_scheduled_lambda" {
   tags = merge(
     var.TAGS,
     {
-      "Name" = "cwr-monitoring-cloudwatch-${var.name}-lambda"
+      "Name" = "cwr-${var.name}"
     },
   )
 }
