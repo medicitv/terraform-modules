@@ -33,7 +33,7 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
 }
 
 resource "aws_cloudwatch_event_rule" "fire_scheduled_lambda" {
-  name                = "cwr-monitoring-cloudwatch-${var.name}-lambda"
+  name                = "cwr-${var.name}"
   description         = var.cron_description
   schedule_expression = var.cron_definition
 
