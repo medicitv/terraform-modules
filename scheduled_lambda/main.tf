@@ -1,5 +1,5 @@
 locals {
-  local_existing_package = var.package_path != null ? "${path.module}/../../../${var.package_path}" : null
+  local_existing_package = var.package_path != null ? var.package_path : null
 }
 
 module "data-automation_scheduled_lambda" {
