@@ -38,5 +38,7 @@ resource "aws_lambda_permission" "alarm_lambda_permission" {
   function_name = module.alarm_lambda.lambda_function_name
   principal     = "events.amazonaws.com"
   source_arn    = var.alarm_source_arn
+
+  depends_on    = [var.alarm_source_arn]
 }
 
