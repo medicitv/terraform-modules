@@ -53,7 +53,3 @@ variable "ignore_source_code_hash" {
 variable "TAGS" {
     type        = map(string)
 }
-
-variable "alarm_source_arn" {
-    type = string
-}
