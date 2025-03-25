@@ -2,7 +2,7 @@ locals {
   local_existing_package = var.package_path != null ? var.package_path : null
 }
 
-module "alarm_lambda" {
+module "simple_lambda" {
   source                         = "terraform-aws-modules/lambda/aws"
   version                        = "7.20.1"
   function_name                  = "lbd-${var.name}"
@@ -28,17 +28,7 @@ module "alarm_lambda" {
 }
 
 resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
-    role       = module.alarm_lambda.lambda_role_name
+    role       = module.simple_lambda.lambda_role_name
     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-}
-
-resource "aws_lambda_permission" "alarm_lambda_permission" {
-  statement_id  = "AllowExecutionFromCloudwatch"
-  action        = "lambda:InvokeFunction"
-  function_name = module.alarm_lambda.lambda_function_name
-  principal     = "events.amazonaws.com"
-  source_arn    = var.alarm_source_arn
-
-  depends_on    = [var.alarm_source_arn]
 }
 
