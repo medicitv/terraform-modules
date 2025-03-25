@@ -1,5 +1,10 @@
+data "aws_cloudwatch_log_group" "test" {
+  name = "/aws/lambda/lbd-${var.name}"
+}
+
 locals {
   local_existing_package = var.package_path != null ? var.package_path : null
+  log_group_exist = length([for b in data.aws_cloudwatch_log_group.test : b.id if b.id != null]) > 0 ? true : false
 }
 
 module "simple_lambda" {
@@ -16,7 +21,7 @@ module "simple_lambda" {
   create_package = false
   package_type = var.package_type
   local_existing_package = local.local_existing_package
-  use_existing_cloudwatch_log_group = var.use_existing_cloudwatch_log_group
+  use_existing_cloudwatch_log_group = local.log_group_exist
   layers             = var.layers
   attach_policy_json = true
   policy_json = var.policy_document
