@@ -25,10 +25,23 @@ module "simple_lambda" {
   vpc_security_group_ids  = var.vpc_security_group_ids
   vpc_subnet_ids          = var.vpc_subnet_ids
   ignore_source_code_hash = var.ignore_source_code_hash
+
+  depends_on = [ aws_cloudwatch_log_group[count.index].simple_lambda ]
 }
 
 resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
     role       = module.simple_lambda.lambda_role_name
     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
+
+resource "aws_cloudwatch_log_group" "simple_lambda" {
+  count = var.use_existing_cloudwatch_log_group ? 0 : 1
+
+  name              = "/aws/lambda/lbd-${var.name}"
+  retention_in_days = var.cloudwatch_log_group_retention_in_days
+  # kms_key_id        = var.cloudwatch_log_group_kms_key_id
+
+  tags = merge(var.TAGS, var.cloudwatch_log_group_tags)
+}
+
 

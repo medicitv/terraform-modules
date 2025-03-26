@@ -50,6 +50,16 @@ variable "ignore_source_code_hash" {
     type = bool
     default = false
 }
+variable "cloudwatch_log_group_retention_in_days" {
+  description = "Specifies the number of days you want to retain log events in log group for Lambda."
+  type        = number
+  default     = 0
+}
+variable "cloudwatch_log_group_tags" {
+  description = "Additional tags for the Cloudwatch log group"
+  type        = map(string)
+  default     = {}
+}
 variable "TAGS" {
     type        = map(string)
 }
