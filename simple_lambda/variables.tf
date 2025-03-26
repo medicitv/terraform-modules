@@ -26,10 +26,6 @@ variable "image_uri" {
     type = string
     default = null
 }
-variable "use_existing_cloudwatch_log_group" {
-    type = bool
-    default = false
-}
 variable "reserved_concurrent_executions" {
     type        = number
     default     = -1
