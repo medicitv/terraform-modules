@@ -2,7 +2,7 @@ locals {
   local_existing_package = var.package_path != null ? var.package_path : null
 }
 
-module "data-automation_api_lambda" {
+module "api_lambda" {
   source                         = "terraform-aws-modules/lambda/aws"
   version                        = "7.20.1"
   function_name                  = "lbd-${var.name}"
@@ -30,7 +30,7 @@ module "data-automation_api_lambda" {
 }
 
 resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
-    role       = module.data-automation_api_lambda.lambda_role_name
+    role       = module.api_lambda.lambda_role_name
     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 

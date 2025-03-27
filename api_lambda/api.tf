@@ -1,7 +1,7 @@
 resource "aws_lambda_permission" "api_lambda" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = module.data-automation_api_lambda.lambda_function_name
+  function_name = module.api_lambda.lambda_function_name
   principal     = "apigateway.amazonaws.com"
 
   # The /*/*/* part allows invocation from any stage, method and resource path
@@ -17,7 +17,7 @@ resource "aws_apigatewayv2_integration" "api_lambda_integration" {
   connection_type           = var.api_integration_connection_type
   description               = var.api_integration_description
   integration_method        = var.api_integration_method
-  integration_uri           = module.data-automation_api_lambda.lambda_function_invoke_arn
+  integration_uri           = module.api_lambda.lambda_function_invoke_arn
 
   payload_format_version    = "2.0"
 }
