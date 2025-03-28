@@ -1,9 +1,9 @@
 output "api_lambda_arn" {
-  value = module.data-automation_api_lambda.lambda_function_arn
+  value = module.api_lambda.lambda_function_arn
 }
 
 output "api_lambda_name" {
-  value = module.data-automation_api_lambda.lambda_function_name
+  value = module.api_lambda.lambda_function_name
 }
 
 # output "api_lambda_target_group_arn" {
