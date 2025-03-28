@@ -13,7 +13,14 @@ variable "package_type" {
     default = "Zip"
 }
 variable "handler" {}
-variable "policy_document" {}
+variable "attach_policy_json" {
+    type = bool
+    default = true
+}
+variable "policy_document" {
+    type = string
+    default = null
+}
 variable "runtime" {
     type = string
     default = "python3.12"
