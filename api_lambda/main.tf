@@ -18,7 +18,7 @@ module "api_lambda" {
   local_existing_package = local.local_existing_package
   use_existing_cloudwatch_log_group = true
   layers             = var.layers
-  attach_policy_json = true
+  attach_policy_json = var.attach_policy_json
   policy_json = var.policy_document
   environment_variables   = var.environment_variables
 
