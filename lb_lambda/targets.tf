@@ -1,12 +1,12 @@
 // Targets and listeners
 resource "aws_lb_target_group" "rest_service" {
-  name        = "lbt-${var.name}"
+  name        = var.name_alt == "" ? "lbt-${var.name}" : "lbt-${var.name_alt}"
   target_type = "lambda"
 
   tags = merge(
     var.TAGS,
     {
-      "Name" = "lbt-${var.name}"
+      "Name" = var.name_alt == "" ? "lbt-${var.name}" : "lbt-${var.name_alt}"
     },
   )
 }

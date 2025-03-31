@@ -1,4 +1,8 @@
 variable "name" {}
+variable "name_alt" {
+    type = string
+    default = ""
+}
 variable "function_name" {
     type = string
     default = ""
