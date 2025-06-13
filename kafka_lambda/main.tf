@@ -1,0 +1,45 @@
+locals {
+  local_existing_package = var.package_path != null ? var.package_path : null
+}
+
+module "kafka_lambda" {
+  source                         = "terraform-aws-modules/lambda/aws"
+  version                        = "7.20.1"
+  function_name                  = "lbd-${var.name}"
+  description                    = var.description
+  handler                        = var.handler
+  runtime                        = var.runtime
+  timeout                        = var.timeout
+  memory_size                    = var.memory_size
+  reserved_concurrent_executions = var.reserved_concurrent_executions
+
+  create_package = false
+  package_type = var.package_type
+  local_existing_package = local.local_existing_package
+  use_existing_cloudwatch_log_group = true
+  layers             = var.layers
+  attach_policy_json = var.attach_policy_json
+  policy_json = var.policy_document
+  environment_variables   = var.environment_variables
+
+  vpc_security_group_ids  = var.vpc_security_group_ids
+  vpc_subnet_ids          = var.vpc_subnet_ids
+  ignore_source_code_hash = var.ignore_source_code_hash
+
+  depends_on = [ aws_cloudwatch_log_group.kafka_lambda ]
+}
+
+resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
+    role       = module.kafka_lambda.lambda_role_name
+    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+}
+
+resource "aws_s3_object" "config" {
+  bucket  = var.kafka_config_bucket
+  key     = var.kafka_config_key
+  content = templatefile(var.kafka_config_file, {
+      function = module.kafka_lambda.lambda_function_name
+    })
+  etag = filemd5(var.kafka_config_file)
+  tags = var.TAGS
+}
