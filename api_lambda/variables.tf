@@ -91,3 +91,13 @@ variable "api_integration_connection_type" {
 variable "api_integration_type" {
     type = string
 }
+
+variable "api_authorization_type" {
+    type = string
+    default = "NONE"
+}
+
+variable "api_authorizer_id" {
+    type = string
+    default = null
+}
