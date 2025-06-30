@@ -92,7 +92,7 @@ variable "api_integration_type" {
     type = string
 }
 
-variable "api_authorization_type" {
+variable "api_authorizer_type" {
     type = string
     default = "NONE"
 }
