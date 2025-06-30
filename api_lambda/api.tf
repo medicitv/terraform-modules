@@ -23,7 +23,7 @@ resource "aws_apigatewayv2_integration" "api_lambda_integration" {
 }
 
 resource "aws_apigatewayv2_route" "api_lambda_route_no_auth" {
-  count              = var.api_authorization_type == "NONE" ? 1 : 0
+  count              = var.api_authorizer_type == "NONE" ? 1 : 0
   api_id             = var.api_gw_id
   route_key          = var.api_route_key
   authorization_type = "NONE"
@@ -31,10 +31,10 @@ resource "aws_apigatewayv2_route" "api_lambda_route_no_auth" {
 }
 
 resource "aws_apigatewayv2_route" "api_lambda_route_auth" {
-  count              = var.api_authorization_type == "CUSTOM" ? 1 : 0
+  count              = var.api_authorizer_type == "CUSTOM" ? 1 : 0
   api_id             = var.api_gw_id
   route_key          = var.api_route_key
-  authorization_type = var.api_authorization_type
+  authorization_type = var.api_authorizer_type
   authorizer_id      = var.api_authorizer_id
   target             = "integrations/${aws_apigatewayv2_integration.api_lambda_integration.id}"
 }
