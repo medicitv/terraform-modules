@@ -97,7 +97,7 @@ variable "api_authorization_type" {
     default = "NONE"
 }
 
-variable "api_authorization_id" {
+variable "api_authorizer_id" {
     type = string
     default = null
 }
