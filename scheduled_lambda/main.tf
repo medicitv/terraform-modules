@@ -16,7 +16,7 @@ module "scheduled_lambda" {
   create_package = false
   package_type = var.package_type
   local_existing_package = local.local_existing_package
-  use_existing_cloudwatch_log_group = var.use_existing_cloudwatch_log_group
+  use_existing_cloudwatch_log_group = true
   layers             = var.layers
   attach_policy_json = true
   policy_json = var.policy_document
@@ -25,6 +25,8 @@ module "scheduled_lambda" {
   vpc_security_group_ids  = var.vpc_security_group_ids
   vpc_subnet_ids          = var.vpc_subnet_ids
   ignore_source_code_hash = var.ignore_source_code_hash
+
+  depends_on = [ aws_cloudwatch_log_group.scheduled_lambda ]
 }
 
 resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
@@ -58,3 +60,10 @@ resource "aws_lambda_permission" "scheduled_lambda_permission" {
   source_arn    = aws_cloudwatch_event_rule.fire_scheduled_lambda.arn
 }
 
+resource "aws_cloudwatch_log_group" "scheduled_lambda" {
+  name              = "/aws/lambda/lbd-${var.name}"
+  retention_in_days = var.cloudwatch_log_group_retention_in_days
+  # kms_key_id        = var.cloudwatch_log_group_kms_key_id
+
+  tags = merge(var.TAGS, var.cloudwatch_log_group_tags)
+}
