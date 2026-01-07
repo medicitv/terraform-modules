@@ -34,14 +34,14 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
-resource "aws_s3_bucket_notification" "data-automation-ca-google-drive-upload-trigger" {
+resource "aws_s3_bucket_notification" "bucket_lambda_trigger" {
   bucket = var.bucket_notification_id
   lambda_function {
     lambda_function_arn = module.bucket_lambda.lambda_function_arn
     events              = var.notification_events
   }
 }
-resource "aws_lambda_permission" "data-automation-ca-google-drive-upload-permission" {
+resource "aws_lambda_permission" "bucket_lambda_permission" {
   statement_id  = "AllowS3Invoke"
   action        = "lambda:InvokeFunction"
   function_name = module.bucket_lambda.lambda_function_name
