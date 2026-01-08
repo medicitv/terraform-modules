@@ -94,7 +94,7 @@ resource "aws_cloudwatch_log_group" "ecs_cloudwatch_log_group" {
 }
 
 module "container_definition" {
-  source = "github.com/cloudposse/terraform-aws-ecs-container-definition?ref=0.38.0"
+  source = "github.com/cloudposse/terraform-aws-ecs-container-definition?ref=0.61.1"
   container_name = var.container_name
   container_image = var.container_image
   container_cpu = var.cpu
