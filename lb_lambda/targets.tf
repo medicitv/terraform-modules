@@ -1,12 +1,16 @@
+locals {
+  target_group_name = var.name_alt != "" ? var.name_alt : var.name
+}
+
 // Targets and listeners
 resource "aws_lb_target_group" "service" {
-  name        = var.name_alt == "" ? "lbt-${var.name}" : "lbt-${var.name_alt}"
+  name        = "lbt-${local.target_group_name}"
   target_type = "lambda"
 
   tags = merge(
     var.TAGS,
     {
-      "Name" = var.name_alt == "" ? "lbt-${var.name}" : "lbt-${var.name_alt}"
+      "Name" = "lbt-${local.target_group_name}"
     },
   )
 }
