@@ -1,5 +1,5 @@
 locals {
-  target_group_name = var.name_alt || var.name
+  target_group_name = var.name_alt != "" ? var.name_alt : var.name
 }
 
 // Targets and listeners
