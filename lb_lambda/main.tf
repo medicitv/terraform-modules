@@ -26,7 +26,11 @@ module "lb_lambda" {
   vpc_subnet_ids          = var.vpc_subnet_ids
   ignore_source_code_hash = var.ignore_source_code_hash
 
+<<<<<<< HEAD
   depends_on = [ aws_cloudwatch_log_group.simple_lambda ]
+=======
+  depends_on = [ aws_cloudwatch_log_group.lb_lambda ]
+>>>>>>> ef0abcf (add lb_lambda)
 }
 
 resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
@@ -34,7 +38,11 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
+<<<<<<< HEAD
 resource "aws_cloudwatch_log_group" "simple_lambda" {
+=======
+resource "aws_cloudwatch_log_group" "lb_lambda" {
+>>>>>>> ef0abcf (add lb_lambda)
   name              = "/aws/lambda/lbd-${var.name}"
   retention_in_days = var.cloudwatch_log_group_retention_in_days
   # kms_key_id        = var.cloudwatch_log_group_kms_key_id

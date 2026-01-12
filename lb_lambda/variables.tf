@@ -41,6 +41,23 @@ variable "image_uri" {
     type = string
     default = null
 }
+<<<<<<< HEAD
+=======
+variable "use_existing_cloudwatch_log_group" {
+    type = bool
+    default = false
+}
+variable "cloudwatch_log_group_retention_in_days" {
+  description = "Specifies the number of days you want to retain log events in log group for Lambda."
+  type        = number
+  default     = 0
+}
+variable "cloudwatch_log_group_tags" {
+  description = "Additional tags for the Cloudwatch log group"
+  type        = map(string)
+  default     = {}
+}
+>>>>>>> ef0abcf (add lb_lambda)
 variable "reserved_concurrent_executions" {
     type        = number
     default     = -1
@@ -60,6 +77,7 @@ variable "ignore_source_code_hash" {
     type = bool
     default = false
 }
+<<<<<<< HEAD
 variable "cloudwatch_log_group_retention_in_days" {
   description = "Specifies the number of days you want to retain log events in log group for Lambda."
   type        = number
@@ -70,6 +88,8 @@ variable "cloudwatch_log_group_tags" {
   type        = map(string)
   default     = {}
 }
+=======
+>>>>>>> ef0abcf (add lb_lambda)
 variable "TAGS" {
     type        = map(string)
 }
@@ -81,4 +101,8 @@ variable "lb_listener_path_pattern" {
 }
 variable "lb_listener_host_header" {
     type        = list(string)
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ef0abcf (add lb_lambda)
