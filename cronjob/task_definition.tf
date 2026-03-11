@@ -27,8 +27,10 @@ resource "aws_ecs_task_definition" "cronjob" {
         }
       ),
       #prevent buggy provider issue
-      dependsOn = []
+      dependsOn      = []
       systemControls = []  # Explicitly specify an empty array for prevent buggy provider issue
+      mountPoints    = []  # Added to prevent plan/apply inconsistency with AWS provider >= v4
+      volumesFrom    = []  # Added to prevent plan/apply inconsistency with AWS provider >= v4
     }
   )])
 
