@@ -1,7 +1,7 @@
 
 resource "aws_cloudwatch_event_rule" "cronjob" {
   name                = "cwr-${var.app}-cron-${var.name}"
-  description         = "Fires legacy cron job ${var.name}"
+  description         = "Fires cron job ${var.name}"
   schedule_expression = var.schedule_expression
 
   tags = merge(
