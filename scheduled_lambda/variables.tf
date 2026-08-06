@@ -43,8 +43,12 @@ variable "environment_variables" {
 }
 variable "vpc_security_group_ids" {
     type        = list(string)
+    default     = null
 }
-variable "vpc_subnet_ids" {}
+variable "vpc_subnet_ids" {
+    type        = list(string)
+    default     = null
+}
 
 variable "ignore_source_code_hash" {
     type = bool

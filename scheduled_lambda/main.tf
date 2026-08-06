@@ -30,6 +30,7 @@ module "scheduled_lambda" {
 }
 
 resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
+    count      = var.vpc_subnet_ids != null ? 1 : 0
     role       = module.scheduled_lambda.lambda_role_name
     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
